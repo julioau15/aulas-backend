@@ -68,6 +68,8 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         console.log('[ERRO] está vazio')
                     }else if(!isLimite(nota1, nota2, nota3, nota4)){
                         console.log('[ERRO] as notas estão fora do limite (0 - 100)')  
+                    }else if(!isNumero(nota1, nota2, nota3, nota4)){
+                        console.log('[ERRO] as notas precisam ser números')  
                     }else{
                         let mediaAluno = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / 4
                         console.log(`--------------------`)
@@ -98,6 +100,14 @@ function isLimite(nota1, nota2, nota3, nota4){
         return false
     }else{
         return true
+    }
+}
+
+function isNumero(nota1, nota2, nota3, nota4){
+    if(!isNaN(nota1) && !isNaN(nota2) && !isNaN(nota3) && !isNaN(nota4)){
+        return true
+    }else{
+        return false
     }
 }
 
