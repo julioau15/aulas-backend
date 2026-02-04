@@ -74,11 +74,8 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         let mediaAluno = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / 4
                         console.log(`--------------------`)
                         console.log(`Aluno: ${nomeAluno}`)
-                        console.log(`Nota 1: ${nota1}`)
-                        console.log(`Nota 2: ${nota2}`)
-                        console.log(`Nota 3: ${nota3}`)
-                        console.log(`Nota 4: ${nota4}`)
                         console.log(`Média: ${mediaAluno.toFixed(2)}`)
+                        console.log(`Situação: ${verificarSituacao(mediaAluno)}`)
                         console.log(`--------------------`)
                     }  
                 })
@@ -111,3 +108,12 @@ function isNumero(nota1, nota2, nota3, nota4){
     }
 }
 
+function verificarSituacao(media){
+    if(media >= 70){
+        return 'APROVADO'
+    }else if(media < 70 && media >= 50){
+        return 'RECUPERAÇÃO'
+    }else{
+        return 'REPROVADO'
+    }
+}
