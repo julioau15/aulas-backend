@@ -78,7 +78,7 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         console.log(`Nota 2: ${nota2}`)
                         console.log(`Nota 3: ${nota3}`)
                         console.log(`Nota 4: ${nota4}`)
-                        console.log(`Média: ${mediaAluno}`)
+                        console.log(`Média: ${mediaAluno.toFixed(2)}`)
                         console.log(`--------------------`)
                     }  
                 })
