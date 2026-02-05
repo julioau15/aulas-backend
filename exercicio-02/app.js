@@ -54,7 +54,7 @@ entradaDeDados.question('Por favor, digite o nome do cliente: ', function(client
                         }else if(!isNumber(valorCompra, taxaJuros, tempoPagamento)){
                             console.log('[ERRO] o Valor de compra, a taxa de juros e o tempo de pagamento devem ser números!')
                             entradaDeDados.close()
-                        }else if(valorCompra < 0 || taxaJuros < 0 || tempoPagamento){
+                        }else if(valorCompra < 0 || taxaJuros < 0 || tempoPagamento < 0){
                             console.log('[ERRO] Os valores ser positivos!')
                             entradaDeDados.close()
                         }else{
@@ -105,11 +105,11 @@ function calcularMontanteFinal(valorCompra, taxaJuros, tempoPagamento){
 }
 
 function montarMensagem(nomeCliente, nomeProduto, valorCompra,tempoPagamento, montanteFinal){
-    console.log(`******************* [Viva Moda] *******************`)
-    console.log(`Muito obrigado por realizar a sua compra conosco Sr(a) ${nomeCliente}`)
-    console.log(`A compra do produto ${nomeProduto}, tem um valor de: R\$${Number(valorCompra).toFixed(2)}`)
+    console.log(`***************************** [Viva Moda] *****************************`)
+    console.log(`Muito obrigado por realizar a sua compra conosco Sr(a) ${nomeCliente}!`)
+    console.log(`A compra do produto ${nomeProduto}, tem um valor de: R\$${Number(valorCompra).toFixed(2)}.`)
     console.log(`A sua compra será parcelada em ${tempoPagamento} vezes e o Sr(a) pagará: R\$${Number(montanteFinal).toFixed(2)}.`)
     console.log(`O acréscimo realizado ao valor de: R\$${Number(valorCompra).toFixed(2)} será de R\$${(Number(montanteFinal) - Number(valorCompra)).toFixed(2)}.\n`)
-    console.log(`Muito obrigado por escolher a Viva Moda.`)
-    console.log(`*******************************************************`)
+    console.log(`Muito obrigado por escolher a Viva Moda!`)
+    console.log(`***********************************************************************`)
 }
