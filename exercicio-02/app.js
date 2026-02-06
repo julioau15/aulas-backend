@@ -26,6 +26,7 @@
  * ***************************************************************
  */
 
+// Importando biblioteca para ler as linhas no console
 let readline = require('readline')
 
 let entradaDeDados = readline.createInterface({
@@ -33,7 +34,7 @@ let entradaDeDados = readline.createInterface({
     output: process.stdout
 })
 
-
+// entrada de dados pelo console
 entradaDeDados.question('Por favor, digite o nome do cliente: ', function(cliente){
     let nomeCliente = cliente
     entradaDeDados.question('Por favor, digite o nome do produto: ', function(produto){
@@ -48,24 +49,32 @@ entradaDeDados.question('Por favor, digite o nome do cliente: ', function(client
                         let tempoPagamento = tempo
                         let montanteFinal
 
+                        // ---------- Chamando Validações -------------
+                        //validação de campo vazio
                         if(isEmpty(nomeCliente, nomeProduto, valorCompra, taxaJuros, tipoTempo, tempoPagamento)){
                             console.log('[ERRO] Os campos devem ser preenchidos!')
                             entradaDeDados.close()
+                            //validação para verificar se os valores são números
                         }else if(!isNumber(valorCompra, taxaJuros, tempoPagamento)){
                             console.log('[ERRO] o Valor de compra, a taxa de juros e o tempo de pagamento devem ser números!')
                             entradaDeDados.close()
+                            //validação de valores negativos
                         }else if(valorCompra < 0 || taxaJuros < 0 || tempoPagamento < 0){
                             console.log('[ERRO] Os valores ser positivos!')
                             entradaDeDados.close()
                         }else{
+                            // Validando qual o tipo de tempo (mes ou ano) 
                             if(tipoTempo.toLowerCase() == 'meses' || tipoTempo.toLowerCase() == 'mes' || tipoTempo.toLowerCase() == 'mês'){
+                                // Chamando funções de calculo e mensagem
                                 montanteFinal = calcularMontanteFinal(valorCompra, taxaJuros, tempoPagamento)
                                 montarMensagem(nomeCliente, nomeProduto, valorCompra, tempoPagamento, montanteFinal)
                                 entradaDeDados.close()
 
                             }else if(tipoTempo.toLowerCase() == 'anos' || tipoTempo.toLowerCase() == 'ano'){
+                                // Caso o tipo de tempo for ANOS tranforma em MESES
                                 let taxaJurosMes = Number(taxaJuros)/12
                                 let tempoPagamentoMes = (Number(tempoPagamento) * 12)
+
                                 montanteFinal = calcularMontanteFinal(valorCompra, taxaJurosMes, tempoPagamentoMes)
                                 montarMensagem(nomeCliente, nomeProduto, valorCompra, tempoPagamentoMes, montanteFinal)
                                 entradaDeDados.close()
@@ -81,6 +90,7 @@ entradaDeDados.question('Por favor, digite o nome do cliente: ', function(client
     })
 })
 
+// Função para validar campos vazios
 function isEmpty(nomeCliente, nomeProduto, valorCompra, taxaJuros, tipoTempo, tempoPagamento){
     if(nomeCliente == '' || nomeProduto == '' || valorCompra == '' || taxaJuros == '' || tipoTempo == '' || tempoPagamento == ''){
         return true
@@ -89,6 +99,7 @@ function isEmpty(nomeCliente, nomeProduto, valorCompra, taxaJuros, tipoTempo, te
     }
 }
 
+// Função para validar se os valores são números
 function isNumber(valorCompra, taxaJuros, tempoPagamento){
     if(isNaN(valorCompra) || isNaN(taxaJuros) || isNaN(tempoPagamento)){
         return false
@@ -97,6 +108,7 @@ function isNumber(valorCompra, taxaJuros, tempoPagamento){
     }
 }
 
+// Função para calcular o montante final
 function calcularMontanteFinal(valorCompra, taxaJuros, tempoPagamento){
     let i = Number(taxaJuros) / 100
     let c = Number(valorCompra)
@@ -104,6 +116,7 @@ function calcularMontanteFinal(valorCompra, taxaJuros, tempoPagamento){
     return c * (1 + i) ** n 
 }
 
+// Função para montar a mensagem
 function montarMensagem(nomeCliente, nomeProduto, valorCompra,tempoPagamento, montanteFinal){
     console.log(`***************************** [Viva Moda] *****************************`)
     console.log(`Muito obrigado por realizar a sua compra conosco Sr(a) ${nomeCliente}!`)
