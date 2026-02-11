@@ -48,7 +48,7 @@ function montarMensagem(nomeCliente, nomeProduto, valorCompra,tempoPagamento, mo
     console.log(`***************************** [Viva Moda] *****************************`)
     console.log(`Muito obrigado por realizar a sua compra conosco Sr(a) ${nomeCliente}!`)
     console.log(`A compra do produto ${nomeProduto}, tem um valor de: R\$${Number(valorCompra).toFixed(2)}.`)
-    console.log(`A sua compra será parcelada em ${tempoPagamento} vezes e o Sr(a) pagará: R\$${montanteFinal()}.`)
+    console.log(`A sua compra será parcelada em ${tempoPagamento} vezes e o Sr(a) pagará: R\$${montanteFinal}.`)
     console.log(`O acréscimo realizado ao valor de: R\$${Number(valorCompra).toFixed(2)} será de R\$${diferenca}.\n`)
     console.log(`Muito obrigado por escolher a Viva Moda!`)
     console.log(`***********************************************************************`)
