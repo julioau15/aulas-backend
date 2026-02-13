@@ -4,3 +4,4 @@
 * Exercício 01 - Somando dois valores
 * Aula 02 - comandos básicos `(condições, validações)`
 * Exercício 02 - Cálculo de Juros Compostos com validação
+* Aula 03 - funções
