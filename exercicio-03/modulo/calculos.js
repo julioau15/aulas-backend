@@ -5,6 +5,34 @@
  * Versão: 1.0
  * *************************************************************************/
 
+// modulo de tratamento
+const tratamento = require('./tratamento')
+
+// Função responsavel por definir a operação
+function definirResultado(operacao, n1, n2){
+    let numero1 = n1
+    let numero2 = n2
+    let operacaoMat = tratamento.validarOperacao(operacao)
+
+    if(!operacaoMat){
+        return false
+    }else{
+        switch(operacaoMat){
+            case 'soma':
+                return somar(numero1, numero2)
+            case 'subtração':
+                return subtrair(numero1, numero2)
+            case 'divisão':
+                return dividir(numero1, numero2)
+            case 'multiplicação':
+                return multiplicar(numero1, numero2)
+        }
+    }
+    
+}
+
+
+
 // Função responsavel por calcular a soma
 function somar(n1, n2){
     // garante que o valor decimal esteja no formato internacional
@@ -12,15 +40,15 @@ function somar(n1, n2){
     let numero2 = String(n2).replace(/,/g, '.')
 
     // caso o valor esteja com dois ou mais '.' impossivel realizar o calculo
-    if(numero1.split('.').length - 1 > 1 || numero2.split('.').length - 1 > 1){
+    if(!tratamento.isDecimalValido(numero1) || !tratamento.isDecimalValido(numero2)){
         console.log('\n[ERRO]! os valores não podem conter duas ou mais \',\' ou \'.\'')
         return false
     }else{
         // validação dos valores
-        if(numero1 == '' || numero2 == ''){
+        if(tratamento.isEmpty(numero1) || tratamento.isEmpty(numero2)){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
-        }else if(isNaN(numero1) || isNaN(numero2)){
+        }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
             console.log('\n[ERRO]! Os valores devem ser númericos.')
             return false
         }else{
@@ -38,15 +66,15 @@ function subtrair(n1, n2){
     let numero2 = String(n2).replace(/,/g, '.')
 
     // caso o valor esteja com dois ou mais '.' impossivel realizar o calculo
-    if(numero1.split('.').length - 1 > 1 || numero2.split('.').length - 1 > 1){
+    if(!tratamento.isDecimalValido(numero1) || !tratamento.isDecimalValido(numero2)){
         console.log('\n[ERRO]! os valores não podem conter duas ou mais \',\' ou \'.\'')
         return false
     }else{
         // validação dos valores
-        if(numero1 == '' || numero2 == ''){
+        if(tratamento.isEmpty(numero1) || tratamento.isEmpty(numero2)){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
-        }else if (isNaN(numero1) || isNaN(numero2)){
+        }else if (!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
             console.log('\n[ERRO]! Os valores devem ser númericos.')
             return false
         }else{
@@ -65,18 +93,18 @@ function dividir(n1, n2){
     let numero2 = String(n2).replace(/,/g, '.')
 
     // caso o valor esteja com dois ou mais '.' impossivel realizar o calculo
-    if(numero1.split('.').length - 1 > 1 || numero2.split('.').length - 1 > 1){
+    if(!tratamento.isDecimalValido(numero1) || !tratamento.isDecimalValido(numero2)){
         console.log('\n[ERRO]! os valores não podem conter duas ou mais \',\' ou \'.\'')
         return false
     }else{
          // validação dos valores
-        if(numero1 == '' || numero2 == ''){
+        if(tratamento.isEmpty(numero1) || tratamento.isEmpty(numero2)){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
-        }else if(isNaN(numero1) || isNaN(numero2)){
+        }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
             console.log('\n[ERRO]! Os valores devem ser númericos.')
             return false
-        }else if(numero2 == '0'){
+        }else if(tratamento.isZero(numero2)){
             console.log('\n[ERRO]! Impossivel dividir por 0')
             return false
         }else{
@@ -95,15 +123,15 @@ function multiplicar(n1, n2){
     let numero2 = String(n2).replace(/,/g, '.')
 
     // caso o valor esteja com dois ou mais '.' impossivel realizar o calculo
-    if(numero1.split('.').length - 1 > 1 || numero2.split('.').length - 1 > 1){
+    if(!tratamento.isDecimalValido(numero1) || !tratamento.isDecimalValido(numero2)){
         console.log('\n[ERRO]! os valores não podem conter duas ou mais \',\' ou \'.\'')
         return false
     }else{
          // validação dos valores
-        if(numero1 == '' || numero2 == ''){
+        if(tratamento.isEmpty(numero1) || tratamento.isEmpty(numero2)){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
-        }else if(isNaN(numero1) || isNaN(numero2)){
+        }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
             console.log('\n[ERRO]! Os valores devem ser númericos.')
             return false
         }else{
@@ -115,10 +143,7 @@ function multiplicar(n1, n2){
    
 }
 
-// tornando as funções publicas para este projeto
+// tornando a função publica para este projeto
 module.exports = {
-    somar,
-    subtrair,
-    dividir,
-    multiplicar
+    definirResultado
 }
