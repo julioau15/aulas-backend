@@ -49,7 +49,7 @@ function somar(n1, n2){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
         }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
-            console.log('\n[ERRO]! Os valores devem ser númericos.')
+            console.log('\n[ERRO]! Os valores devem ser numéricos.')
             return false
         }else{
             // retorna a soma
@@ -75,7 +75,7 @@ function subtrair(n1, n2){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
         }else if (!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
-            console.log('\n[ERRO]! Os valores devem ser númericos.')
+            console.log('\n[ERRO]! Os valores devem ser numéricos.')
             return false
         }else{
             // retorna a subtração
@@ -102,7 +102,7 @@ function dividir(n1, n2){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
         }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
-            console.log('\n[ERRO]! Os valores devem ser númericos.')
+            console.log('\n[ERRO]! Os valores devem ser numéricos.')
             return false
         }else if(tratamento.isZero(numero2)){
             console.log('\n[ERRO]! Impossivel dividir por 0')
@@ -132,7 +132,7 @@ function multiplicar(n1, n2){
             console.log('\n[ERRO]! Os campos não podem estar vazios.')
             return false
         }else if(!tratamento.isNumero(numero1) || !tratamento.isNumero(numero2)){
-            console.log('\n[ERRO]! Os valores devem ser númericos.')
+            console.log('\n[ERRO]! Os valores devem ser numéricos.')
             return false
         }else{
             // retorna a subtração
