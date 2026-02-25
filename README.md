@@ -5,4 +5,5 @@
 * Aula 02 - comandos básicos `(condições, validações)`
 * Exercício 02 - Cálculo de Juros Compostos com validação
 * Aula 03 - funções
-* Exercício 03 - Calculadora simples para realizar operações de (soma, subtração, divisão e multiplicação)
+* Exercício 03 - Calculadora simples para realizar operações de `(soma, subtração, divisão e multiplicação)`
+* Correção Exercício 03 - `(Switch case, função Anônima, Arrow function)`
