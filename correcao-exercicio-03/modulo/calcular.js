@@ -15,33 +15,37 @@ const calcular = function(n1, n2, operador){
     let resultado
      
     // validações das operações
-    // A ausência da {} na condicional é porque qualquer condicional que tenha uma linha
-    // de processamento a {} torna-se opcional
+        // A ausência da {} na condicional é porque qualquer condicional que tenha uma linha
+        // de processamento a {} torna-se opcional
 
     // processamento
-//    if(operacao == 'somar')
-//         resultado = numero1 + numero2
-//    else if(operacao == 'subtrair')
-//         resultado = numero1 - numero2
-//    else if(operacao == 'dividir')
-//         resultado = numero1 / numero2
-//    else if(operacao == 'multiplicar')
-//         resultado = numero1 * numero2
+        //   if(operacao == 'somar')
+        //       resultado = numero1 + numero2
+        //  else if(operacao == 'subtrair')
+        //       resultado = numero1 - numero2
+        //  else if(operacao == 'dividir')
+        //       resultado = numero1 / numero2
+        //  else if(operacao == 'multiplicar')
+        //       resultado = numero1 * numero2
 
+    // switch case:
+        // estrutura de condições
+        // obrigatório uso de break
     switch (operacao){
         case 'somar':
-            resultado = numero1 + numero2
+            resultado = somar(numero1, numero2)
             break
         case 'subtrair':
-            resultado = numero1 - numero2
+            resultado = subtrair(numero1, numero2)
             break
         case 'dividir':
-            resultado = numero1 / numero2
+            resultado = dividir(numero1, numero2)
             break
         case 'multiplicar':
-            resultado = numero1 * numero2
+            resultado = multiplicar(numero1, numero2)
             break
     }
+    
    // saida
    if(resultado != undefined) 
         return Number(resultado).toFixed(2)
@@ -49,7 +53,15 @@ const calcular = function(n1, n2, operador){
         return false
 }
 
+// Exemplos de arrow function:
+    // Esconde a palavra funtion
+    // Esconde o return
+    // Se tiver uma linha não precisa de { }
+const somar       = (n1, n2) => Number(n1) + Number(n2) // somar
+const subtrair    = (n1, n2) => Number(n1) - Number(n2) // subtrair
+const dividir     = (n1, n2) => Number(n1) / Number(n2) // dividir
+const multiplicar = (n1, n2) => Number(n1) * Number(n2) // multiplicar
 
-
-const resultado = calcular(10,20,'multiplicar')
-console.log(resultado)
+module.exports = {
+    calcular
+}
