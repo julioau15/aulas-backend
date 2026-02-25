@@ -6,7 +6,8 @@
  * ********************************************************************/
 
 // valida se um dado está vazio
-const isEmpty = (dado) =>{
+const isEmpty = (d) =>{
+    let dado = String(d)
     if(dado == '')
         return true
     else
@@ -29,7 +30,7 @@ const isLimit = (min, max, n)=>{
     let numeroMax = Number(max)
     let numero = Number(n)
 
-    if(n <= numeroMax && n >= numeroMin)
+    if(numero <= numeroMax && n >= numeroMin)
         return true
     else
         return false

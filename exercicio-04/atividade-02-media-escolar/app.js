@@ -29,6 +29,12 @@
 // Importando biblioteca para ler as linhas no console
 const readline = require('readline')
 
+// Importando biblioteca para calculos
+const calcular = require('../module/calculos')
+
+// Importando biblioteca regras de negócio
+const mediaEscolar = require('../module/mediaEscolar')
+
 let entradaDeDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -41,8 +47,8 @@ entradaDeDados.question('Por favor, digite o nome do aluno: ', function(nomeA){
         let sexoAluno = sexoA
         entradaDeDados.question('Por favor, digite o nome do professor: ', function(nomeP){
             let nomeProfessor = nomeP
-            entradaDeDados.question('Por favor, digite o sexo do professor: ', function(nomeP){
-                let nomeProfessor = nomeP
+            entradaDeDados.question('Por favor, digite o sexo do professor: ', function(sexoP){
+                let sexoProfessor = sexoP
                 entradaDeDados.question('Por favor, digite o nome do curso: ', function(nomeC){
                     let nomeCurso = nomeC
                     entradaDeDados.question('Por favor, digite o nome da diciplina: ', function(nomeD){
@@ -55,7 +61,40 @@ entradaDeDados.question('Por favor, digite o nome do aluno: ', function(nomeA){
                                     let nota3 = n3
                                     entradaDeDados.question('Por favor, digite a nota 4: ', function(n4){
                                         let nota4 = n4
-                            
+
+                                        // calcula a media
+                                        let mediaFinal = calcular.calcularMedia(nota1, nota2, nota3, nota4)
+
+                                        // verifica se a media é valida
+                                        if(!mediaFinal){
+                                            console.log('ERRO, por favor verifique os dados.')
+                                            entradaDeDados.close()
+                                        }else{
+                                            // define o status do aluno
+                                            let status = mediaEscolar.definirStatus(mediaFinal)
+                                            
+                                            // verfica se o status é recuperação
+                                            if(!mediaEscolar.isRecuperacao(status)){
+                                                // escreve mensagem
+                                                mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status)
+                                                entradaDeDados.close()
+                                            }else{
+                                                // abre uma nova entrada de dados para perguntar a nota do exame
+                                                entradaDeDados.question('Por favor, digite a nota do exame: ', function (nExame){
+                                                    let notaExame = nExame
+                                                    // calcula a media do exame + media Geral
+                                                    let mediaFinalExame = calcular.calcularMedia2(notaExame, mediaFinal)
+
+                                                    // define o status
+                                                    status = mediaEscolar.definirStatusExame(mediaFinalExame)
+
+                                                    // escreve a mensagem
+                                                    mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status, notaExame, mediaFinalExame)
+
+                                                    entradaDeDados.close()
+                                                })
+                                            }
+                                        }
                                     })
                                 })
                             })
