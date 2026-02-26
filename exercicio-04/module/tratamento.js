@@ -13,7 +13,7 @@ const validarNumero = (...n) => n.every(numero => !isEmpty(String(numero)) && !N
 // valida se um dado está vazio
     // as reticências deixam a função receber um ou mais valores no atributo 'd'
     //o metodo 'some' valida todos dados informados
-const isEmpty = (...d) => d.some(dado => String(dado) == '')
+const isEmpty = (...d) => d.some(dado => String(dado).trim() == '' || dado == null || dado == undefined)
 
 
 // valida se um numero é par

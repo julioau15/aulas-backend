@@ -46,11 +46,41 @@ const calcularMedia2 = (n1, n2) => {
     else
         // retorna a media
         return (numero1 + numero2) / 2
-}   
+}
+
+const multiplicar = (n1, n2) => Number(n1) * Number(n2)
+
+const calcularTabuada = (n, contadorI, contadorF) => {
+    let tabuada = Number(n)
+    let contadorInicial = Number(contadorI)
+    let contadorFinal = Number(contadorF)
+
+    if(!tratamento.validarNumero(n, contadorInicial, contadorFinal)){
+        return false
+    }else{
+        // inverte os valores caso o valor minimo seja maior que o maximo
+        if(contadorInicial > contadorFinal){
+            let auxiliar = contadorInicial
+            contadorInicial = contadorFinal
+            contadorFinal = auxiliar
+        }
+
+        // repetição para gerar a tabuada
+        for(contadorInicial; contadorInicial <= contadorFinal; contadorInicial++){
+            // chama a função de multiplicar
+            let resultado = multiplicar(tabuada, contadorInicial)
+            console.log(`${tabuada} x ${contadorInicial} = ${resultado}`)
+        }
+
+        return true
+    }
+
+}
 
 // exporta função
 module.exports = {
     calcularImc,
     calcularMedia,
-    calcularMedia2
+    calcularMedia2,
+    calcularTabuada
 }
