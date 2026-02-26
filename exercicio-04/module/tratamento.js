@@ -5,49 +5,35 @@
  * Versão: 1.0
  * ********************************************************************/
 
+// faz todas validações de numeros
+    // as reticências deixam a função receber um ou mais valores no atributo 'n'
+    //o metodo 'every' valida todos numeros informados
+const validarNumero = (...n) => n.every(numero => !isEmpty(String(numero)) && !Number.isNaN(Number(numero)) && isDecimalValido(Number(numero)))
+
 // valida se um dado está vazio
-const isEmpty = (d) =>{
-    let dado = String(d)
-    if(dado == '')
-        return true
-    else
-        return false
-    
-}
+    // as reticências deixam a função receber um ou mais valores no atributo 'd'
+    //o metodo 'some' valida todos dados informados
+const isEmpty = (...d) => d.some(dado => String(dado) == '')
+
 
 // valida se um numero é par
-const isPar = (n)=>{
-    let numero = Number(n)
-    if(numero % 2 == 0)
-        return true
-    else
-        return false
-}
+    // as reticências deixam a função receber um ou mais valores no atributo 'n'
+    //o metodo 'every' valida todos numeros informados
+const isPar = (...n) => n.every(numero =>Number(numero) % 2 == 0)
 
 // valida se um numero esta no limite definido
-const isLimit = (min, max, n)=>{
-    let numeroMin = Number(min)
-    let numeroMax = Number(max)
-    let numero = Number(n)
-
-    if(numero <= numeroMax && n >= numeroMin)
-        return true
-    else
-        return false
-}
+    // as reticências deixam a função receber um ou mais valores no atributo 'n'
+    //o metodo 'every' valida todos numeros informados
+const isLimit = (min, max, ...n)=> n.every(numero => Number(numero) <= Number(max) && Number(numero) >= Number(min))
 
 // faz o tratamento de ',' em um numero decimal
 const tratarDecimal = (n) => String(n).replace(/,/g, '.')
 
 // valida se um numero decimal é valido
-const isDecimalValido = (n) =>{
-    let numero = tratarDecimal(n)
-    if(numero.split('.').length - 1 > 1){
-        return false
-    }else{
-        return true
-    }
-}
+ // as reticências deixam a função receber um ou mais valores no atributo 'n'
+    //o metodo 'every' valida todos numeros informados
+const isDecimalValido = (...n) => n.every(numero => tratarDecimal(numero).split('.').length - 1 <= 1)
+
 
 // exporta funções
 module.exports = {
@@ -55,5 +41,6 @@ module.exports = {
     isPar,
     isLimit,
     isDecimalValido,
-    tratarDecimal
+    tratarDecimal,
+    validarNumero
 }

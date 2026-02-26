@@ -68,7 +68,7 @@ const escreverMensagem = (nomeA, nomeP, sexoA, sexoP, nomeD, nomeC, n1, n2, n3, 
     console.log(`${aluno} ${nomeAluno} foi ${statusFinal} na diciplina ${nomeDiciplina}.`)
     console.log(`Curso: ${nomeCurso}`)
     console.log(`${professor}: ${nomeProfessor}`)
-    console.log(`Notas ${aluno}: ${nota1}, ${nota2}, ${nota3}, ${nota4}, ${notaExame}`)
+    console.log(`Notas ${aluno}: ${nota1} | ${nota2} | ${nota3} | ${nota4} | ${notaExame}`)
     console.log(`Média Final: ${mediaFinal}`)
     console.log(`Média final do exame: ${mediaFinalExame}`)
     console.log('---------------------------------------------------------------------------------\n')

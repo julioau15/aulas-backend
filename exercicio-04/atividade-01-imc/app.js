@@ -34,9 +34,9 @@ let entradaDeDados = readline.createInterface({
 // entrada de dados
 entradaDeDados.question('Por favor digite o nome do paciente: ', function(nome){
     let nomePaciente = nome
-    entradaDeDados.question('Por favor digite o peso em Kg do paciente: ', function(peso){
+    entradaDeDados.question('Por favor digite o peso em quilos do paciente: ', function(peso){
         let pesoPaciente = peso
-        entradaDeDados.question('Por favor digite a altura do paciente: ', function(altura){
+        entradaDeDados.question('Por favor digite a altura em metros do paciente: ', function(altura){
             let alturaPaciente = altura
 
             // calcula o imc
