@@ -38,76 +38,80 @@ const validar = require('../module/tratamento')
 // Importando biblioteca regras de negócio
 const mediaEscolar = require('../module/mediaEscolar')
 
-let entradaDeDados = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
 
-// entrada de dados
-entradaDeDados.question('Por favor, digite o nome do aluno: ', function(nomeA){
-    let nomeAluno = nomeA
-    entradaDeDados.question('Por favor, digite o sexo do aluno: ', function(sexoA){
-        let sexoAluno = sexoA
-        entradaDeDados.question('Por favor, digite o nome do professor: ', function(nomeP){
-            let nomeProfessor = nomeP
-            entradaDeDados.question('Por favor, digite o sexo do professor: ', function(sexoP){
-                let sexoProfessor = sexoP
-                entradaDeDados.question('Por favor, digite o nome do curso: ', function(nomeC){
-                    let nomeCurso = nomeC
-                    entradaDeDados.question('Por favor, digite o nome da diciplina: ', function(nomeD){
-                        let nomeDiciplina = nomeD
-                        entradaDeDados.question('Por favor, digite a nota 1: ', function(n1){
-                            let nota1 = n1
-                            entradaDeDados.question('Por favor, digite a nota 2: ', function(n2){
-                                let nota2 = n2
-                                entradaDeDados.question('Por favor, digite a nota 3: ', function(n3){
-                                    let nota3 = n3
-                                    entradaDeDados.question('Por favor, digite a nota 4: ', function(n4){
-                                        let nota4 = n4
+// função geral do app
+const mediaEscolarApp = (entradaExterna) => {
+    let entradaDeDados = entradaExterna ?? readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
 
-                                        //valida campos vazios
-                                        if(validar.isEmpty(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4)){
-                                            console.log('ERRO, os campos não podem estar vazios')
-                                            entradaDeDados.close()
-                                        }else{
-                                                // calcula a media
-                                            let mediaFinal = calcular.calcularMedia(nota1, nota2, nota3, nota4)
+    // entrada de dados
+    entradaDeDados.question('\nPor favor, digite o nome do aluno: ', function(nomeA){
+        let nomeAluno = nomeA
+        entradaDeDados.question('Por favor, digite o sexo do aluno: ', function(sexoA){
+            let sexoAluno = sexoA
+            entradaDeDados.question('Por favor, digite o nome do professor: ', function(nomeP){
+                let nomeProfessor = nomeP
+                entradaDeDados.question('Por favor, digite o sexo do professor: ', function(sexoP){
+                    let sexoProfessor = sexoP
+                    entradaDeDados.question('Por favor, digite o nome do curso: ', function(nomeC){
+                        let nomeCurso = nomeC
+                        entradaDeDados.question('Por favor, digite o nome da diciplina: ', function(nomeD){
+                            let nomeDiciplina = nomeD
+                            entradaDeDados.question('Por favor, digite a nota 1: ', function(n1){
+                                let nota1 = n1
+                                entradaDeDados.question('Por favor, digite a nota 2: ', function(n2){
+                                    let nota2 = n2
+                                    entradaDeDados.question('Por favor, digite a nota 3: ', function(n3){
+                                        let nota3 = n3
+                                        entradaDeDados.question('Por favor, digite a nota 4: ', function(n4){
+                                            let nota4 = n4
 
-                                            // verifica se a media é valida
-                                            if(!mediaFinal){
-                                                console.log('ERRO, por favor verifique os dados.')
+                                            //valida campos vazios
+                                            if(validar.isEmpty(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4)){
+                                                console.log('ERRO, os campos não podem estar vazios')
                                                 entradaDeDados.close()
                                             }else{
-                                                // define o status do aluno
-                                                let status = mediaEscolar.definirStatus(mediaFinal)
-                                                
-                                                // verfica se o status é recuperação
-                                                if(!mediaEscolar.isRecuperacao(status)){
-                                                    // escreve mensagem
+                                                    // calcula a media
+                                                let mediaFinal = calcular.calcularMedia(nota1, nota2, nota3, nota4)
 
-                                                    mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status)
+                                                // verifica se a media é valida
+                                                if(!mediaFinal){
+                                                    console.log('ERRO, por favor verifique os dados.')
                                                     entradaDeDados.close()
                                                 }else{
-                                                    // abre uma nova entrada de dados para perguntar a nota do exame
-                                                    entradaDeDados.question('Por favor, digite a nota do exame: ', function (nExame){
-                                                        let notaExame = nExame
-                                                        // calcula a media do exame + media Geral
-                                                        let mediaFinalExame = calcular.calcularMedia2(notaExame, mediaFinal)
+                                                    // define o status do aluno
+                                                    let status = mediaEscolar.definirStatus(mediaFinal)
+                                                    
+                                                    // verfica se o status é recuperação
+                                                    if(!mediaEscolar.isRecuperacao(status)){
+                                                        // escreve mensagem
 
-                                                        // define o status
-                                                        status = mediaEscolar.definirStatusExame(mediaFinalExame)
-
-                                                        // escreve a mensagem
-                                                        mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status, notaExame, mediaFinalExame)
-
+                                                        mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status)
                                                         entradaDeDados.close()
-                                                    })
+                                                    }else{
+                                                        // abre uma nova entrada de dados para perguntar a nota do exame
+                                                        entradaDeDados.question('Por favor, digite a nota do exame: ', function (nExame){
+                                                            let notaExame = nExame
+                                                            // calcula a media do exame + media Geral
+                                                            let mediaFinalExame = calcular.calcularMedia2(notaExame, mediaFinal)
+
+                                                            // define o status
+                                                            status = mediaEscolar.definirStatusExame(mediaFinalExame)
+
+                                                            // escreve a mensagem
+                                                            mediaEscolar.escreverMensagem(nomeAluno, nomeProfessor, sexoAluno, sexoProfessor, nomeDiciplina, nomeCurso, nota1, nota2, nota3, nota4, mediaFinal, status, notaExame, mediaFinalExame)
+
+                                                            entradaDeDados.close()
+                                                        })
+                                                    }
                                                 }
+
                                             }
 
-                                        }
-
-                                        
+                                            
+                                        })
                                     })
                                 })
                             })
@@ -117,4 +121,12 @@ entradaDeDados.question('Por favor, digite o nome do aluno: ', function(nomeA){
             })
         })
     })
-})
+}
+
+// permite a execução sem passar pelo main
+if(require.main == module){
+    mediaEscolarApp()
+}
+
+// exportando app
+module.exports = {mediaEscolarApp}

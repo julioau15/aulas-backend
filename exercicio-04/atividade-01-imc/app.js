@@ -26,35 +26,47 @@ const classificar = require('../module/imc')
 // Importando biblioteca para tratamento
 const tratamento = require('../module/tratamento')
 
-let entradaDeDados = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+// função geral do app
+const imcApp = (entradaExterna) => {
+    let entradaDeDados = entradaExterna ?? readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
 
-// entrada de dados
-entradaDeDados.question('Por favor digite o nome do paciente: ', function(nome){
-    let nomePaciente = nome
-    entradaDeDados.question('Por favor digite o peso em quilos do paciente: ', function(peso){
-        let pesoPaciente = peso
-        entradaDeDados.question('Por favor digite a altura em metros do paciente: ', function(altura){
-            let alturaPaciente = altura
+    // entrada de dados
+    entradaDeDados.question('\nPor favor digite o nome do paciente: ', function(nome){
+        let nomePaciente = nome
+        entradaDeDados.question('Por favor digite o peso em quilos do paciente: ', function(peso){
+            let pesoPaciente = peso
+            entradaDeDados.question('Por favor digite a altura em metros do paciente: ', function(altura){
+                let alturaPaciente = altura
 
-            // calcula o imc
-            let imc = calcular.calcularImc(pesoPaciente, alturaPaciente)
+                // calcula o imc
+                let imc = calcular.calcularImc(pesoPaciente, alturaPaciente)
 
-            // se o imc for valido e o nome for preenchido o programa continua
-            if(!imc || tratamento.isEmpty(nome)){
-                console.log('ERRO ao calcular imc. Por favor verifique os dados.')
-                entradaDeDados.close()
-            }else{
-                // classifica o imc
-                let classificacao = classificar.classificarImc(imc)
+                // se o imc for valido e o nome for preenchido o programa continua
+                if(!imc || tratamento.isEmpty(nome)){
+                    console.log('ERRO ao calcular imc. Por favor verifique os dados.')
+                    entradaDeDados.close()
+                }else{
+                    // classifica o imc
+                    let classificacao = classificar.classificarImc(imc)
 
-                console.log(`O IMC do(a) Senhor(a) ${nomePaciente} é ${imc}, ${classificacao}`)
+                    console.log(`O IMC do(a) Senhor(a) ${nomePaciente} é ${imc}, ${classificacao}`)
 
-                entradaDeDados.close()
-            }
-        
+                    entradaDeDados.close()
+                }
+            
+            })
         })
     })
-})
+}
+
+// permite a execução sem passar pelo main
+if(require.main == module){
+    imcApp()
+}
+
+
+// exportando app
+module.exports = {imcApp}

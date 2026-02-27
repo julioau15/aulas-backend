@@ -28,46 +28,56 @@ const validar = require('../module/tratamento')
 // Importando biblioteca para calculos
 const calcular = require('../module/calculos')
 
-let entradaDeDados = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+// função geral do app
+const tabuadaApp = (entradaExterna) => {
+    let entradaDeDados = entradaExterna ?? readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
 
-// entrada de dados
-entradaDeDados.question('Por favor, digite a tabuada inicial: ', function(tabuadaI){
-    let tabuadaInicial = tabuadaI
-    entradaDeDados.question('Por favor, digite a tabuada final: ', function(tabuadaF){
-        let tabuadaFinal = tabuadaF
-        entradaDeDados.question('Por favor, digite o contador inicial: ', function(contadorI){
-            let contadorInicial = contadorI
-            entradaDeDados.question('Por favor, digite o contador inicial: ', function(contadorF){
-                let contadorFinal = contadorF
+    // entrada de dados
+    entradaDeDados.question('\nPor favor, digite a tabuada inicial: ', function(tabuadaI){
+        let tabuadaInicial = tabuadaI
+        entradaDeDados.question('Por favor, digite a tabuada final: ', function(tabuadaF){
+            let tabuadaFinal = tabuadaF
+            entradaDeDados.question('Por favor, digite o contador inicial: ', function(contadorI){
+                let contadorInicial = contadorI
+                entradaDeDados.question('Por favor, digite o contador inicial: ', function(contadorF){
+                    let contadorFinal = contadorF
 
-                // valida os campos
-                if(!validar.validarNumero(tabuadaInicial, tabuadaFinal, contadorInicial, contadorFinal)){
-                    console.log('ERRO ao calcular tabuada, por favor verifique os dados.')
-                    entradaDeDados.close()
-
-                }else{
-
-                    if(!validar.isLimit(2,100, tabuadaInicial, tabuadaFinal)||!validar.isLimit(1,50,contadorInicial,contadorFinal)){
-                         console.log('ERRO a tabuada precisa estar entre (2 - 100) e o contador entre (1 - 50).')
+                    // valida os campos
+                    if(!validar.validarNumero(tabuadaInicial, tabuadaFinal, contadorInicial, contadorFinal)){
+                        console.log('ERRO ao calcular tabuada, por favor verifique os dados.')
                         entradaDeDados.close()
+
                     }else{
-                         // calcular tabuada inicial
-                        console.log(`\nTabuada do [${tabuadaInicial}]`)
-                        calcular.calcularTabuada(tabuadaInicial, contadorInicial, contadorFinal)
 
-                        // calcular tabuada final
-                        console.log(`\nTabuada do [${tabuadaFinal}]`)
-                        calcular.calcularTabuada(tabuadaFinal, contadorInicial, contadorFinal)
+                        if(!validar.isLimit(2,100, tabuadaInicial, tabuadaFinal)||!validar.isLimit(1,50,contadorInicial,contadorFinal)){
+                            console.log('ERRO a tabuada precisa estar entre (2 - 100) e o contador entre (1 - 50).')
+                            entradaDeDados.close()
+                        }else{
+                            // calcular tabuada inicial
+                            console.log(`\nTabuada do [${tabuadaInicial}]`)
+                            calcular.calcularTabuada(tabuadaInicial, contadorInicial, contadorFinal)
 
-                        entradaDeDados.close()
+                            // calcular tabuada final
+                            console.log(`\nTabuada do [${tabuadaFinal}]`)
+                            calcular.calcularTabuada(tabuadaFinal, contadorInicial, contadorFinal)
+
+                            entradaDeDados.close()
+                        }
+                    
+                                        
                     }
-                   
-                                       
-                }
+                })
             })
         })
     })
-})
+}
+// permite a execução sem passar pelo main
+if(require.main == module){
+    tabuadaApp()
+}
+
+// exportando app
+module.exports = {tabuadaApp}

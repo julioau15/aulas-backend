@@ -42,58 +42,67 @@ const validar = require('../module/tratamento')
 // Importando biblioteca para separar e imprimir os numeros
 const imparOuPar = require('../module/imparOuPar')
 
-let entradaDeDados = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+// função geral do app
+const imparOuParApp = (entradaExterna) => {
+    let entradaDeDados = entradaExterna ?? readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
 
-// entrada de dados
-entradaDeDados.question('Por favor digite o número inicial: ', function(numeroI){
-    let numeroInicial = numeroI
-    entradaDeDados.question('Por favor digite o número final: ', function(numeroF){
-        let numeroFinal = numeroF
-        entradaDeDados.question('Qual(is) tabela(s) deseja visualizar [par, impar ou ambas]? ', function(opt){
-            let opcao = opt
-            let quantidadeImpar
-            let quantidadePar
+    // entrada de dados
+    entradaDeDados.question('\nPor favor digite o número inicial: ', function(numeroI){
+        let numeroInicial = numeroI
+        entradaDeDados.question('Por favor digite o número final: ', function(numeroF){
+            let numeroFinal = numeroF
+            entradaDeDados.question('Qual(is) tabela(s) deseja visualizar [par, impar ou ambas]? ', function(opt){
+                let opcao = opt
+                let quantidadeImpar
+                let quantidadePar
 
-            // validar campos vazios
-            if(validar.isEmpty(numeroInicial, numeroFinal, opcao)){
-                console.log('ERRO, os campos não podem estar vazios.')
-                entradaDeDados.close()
-            }else{
-                let numerosImpares = imparOuPar.separarImpar(numeroInicial, numeroFinal)
-                let numerosPares = imparOuPar.separarPar(numeroInicial, numeroFinal)
-
-                // validação
-                if(!numerosPares){
-                    console.log('ERRO, por favor verfique os dados.')
+                // validar campos vazios
+                if(validar.isEmpty(numeroInicial, numeroFinal, opcao)){
+                    console.log('ERRO, os campos não podem estar vazios.')
                     entradaDeDados.close()
                 }else{
-                    // faz uma ação conforme a opção escolhida
-                    switch (opcao.toLowerCase()){
-                        case 'par':
-                            quantidadePar = imparOuPar.consultarQuantidade(numerosPares)
-                            imparOuPar.imprimirNumeros(numerosPares, 'pares', quantidadePar)
-                            break
-                        case 'impar':
-                            quantidadeImpar = imparOuPar.consultarQuantidade(numerosImpares)
-                            imparOuPar.imprimirNumeros(numerosImpares, 'impares', quantidadeImpar)
-                            break
-                        case 'ambas':
-                            quantidadePar = imparOuPar.consultarQuantidade(numerosPares)
-                            imparOuPar.imprimirNumeros(numerosPares, 'pares', quantidadePar)
-                            quantidadeImpar = imparOuPar.consultarQuantidade(numerosImpares)
-                            imparOuPar.imprimirNumeros(numerosImpares, 'impares', quantidadeImpar)
-                            break
-                        default:
-                            console.log('ERRO, por favor digite uma opção valida.')
-                            break
-                    }
+                    let numerosImpares = imparOuPar.separarImpar(numeroInicial, numeroFinal)
+                    let numerosPares = imparOuPar.separarPar(numeroInicial, numeroFinal)
 
-                    entradaDeDados.close()
-                }   
-            }
+                    // validação
+                    if(!numerosPares){
+                        console.log('ERRO, por favor verfique os dados.')
+                        entradaDeDados.close()
+                    }else{
+                        // faz uma ação conforme a opção escolhida
+                        switch (opcao.toLowerCase()){
+                            case 'par':
+                                quantidadePar = imparOuPar.consultarQuantidade(numerosPares)
+                                imparOuPar.imprimirNumeros(numerosPares, 'pares', quantidadePar)
+                                break
+                            case 'impar':
+                                quantidadeImpar = imparOuPar.consultarQuantidade(numerosImpares)
+                                imparOuPar.imprimirNumeros(numerosImpares, 'impares', quantidadeImpar)
+                                break
+                            case 'ambas':
+                                quantidadePar = imparOuPar.consultarQuantidade(numerosPares)
+                                imparOuPar.imprimirNumeros(numerosPares, 'pares', quantidadePar)
+                                quantidadeImpar = imparOuPar.consultarQuantidade(numerosImpares)
+                                imparOuPar.imprimirNumeros(numerosImpares, 'impares', quantidadeImpar)
+                                break
+                            default:
+                                console.log('ERRO, por favor digite uma opção valida.')
+                                break
+                        }
+
+                        entradaDeDados.close()
+                    }   
+                }
+            })
         })
     })
-})
+}
+// permite a execução sem passar pelo main
+if(require.main == module){
+    imparOuParApp()
+}
+// exportando app
+module.exports = {imparOuParApp}

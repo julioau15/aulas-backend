@@ -29,6 +29,9 @@ const isLimit = (min, max, ...n)=> n.every(numero => Number(numero) <= Number(ma
 // faz o tratamento de ',' em um numero decimal
 const tratarDecimal = (n) => String(n).replace(/,/g, '.')
 
+// valida se um numero é decimal
+const isDecimal = (...n) => n.some(numero => tratarDecimal(numero).split('.').length > 1)
+
 // valida se um numero decimal é valido
  // as reticências deixam a função receber um ou mais valores no atributo 'n'
     //o metodo 'every' valida todos numeros informados
@@ -42,5 +45,6 @@ module.exports = {
     isLimit,
     isDecimalValido,
     tratarDecimal,
-    validarNumero
+    validarNumero,
+    isDecimal
 }

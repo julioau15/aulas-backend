@@ -15,7 +15,8 @@ const separarPar = (numeroI, numeroF) => {
     let numerosPares = [] // array que recebe os valores 
 
     // validações
-    if(!validar.validarNumero(numeroInicial, numeroFinal) || !validar.isLimit(0, 500, numeroInicial) || !validar.isLimit(100, 1000, numeroFinal)){
+    if(!validar.validarNumero(numeroInicial, numeroFinal) || !validar.isLimit(0, 500, numeroInicial)||
+       !validar.isLimit(100, 1000, numeroFinal) || validar.isDecimal(numeroInicial,numeroFinal)){
         return false
     }else{
 
@@ -38,7 +39,8 @@ const separarImpar = (numeroI, numeroF) => {
     let numerosImpares = [] // array que recebe os valores 
 
     // validações
-    if(!validar.validarNumero(numeroInicial, numeroFinal) || !validar.isLimit(0, 500, numeroInicial) || !validar.isLimit(100, 1000, numeroFinal)){
+    if(!validar.validarNumero(numeroInicial, numeroFinal) || !validar.isLimit(0, 500, numeroInicial)||
+       !validar.isLimit(100, 1000, numeroFinal) || validar.isDecimal(numeroInicial,numeroFinal)){
         return false
     }else{
 

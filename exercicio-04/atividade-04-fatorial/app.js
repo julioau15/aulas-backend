@@ -23,25 +23,36 @@ const calcular = require('../module/calculos')
 // Importando biblioteca imprimir resultado
 const imprimir = require('../module/fatorial')
 
-let entradaDeDados = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+// função geral do app
+const fatorialApp = (entradaExterna) => {
+    let entradaDeDados = entradaExterna ?? readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
 
-// entrada de dados
-entradaDeDados.question('Por favor digite um número: ', function(n){
-    let numero = n
+    // entrada de dados
+    entradaDeDados.question('\nPor favor digite um número: ', function(n){
+        let numero = n
 
-    // calcula fatorial
-    let resultado = calcular.calcularFatorial(n)
+        // calcula fatorial
+        let resultado = calcular.calcularFatorial(n)
 
-    // confirma se o resultado é valido
-    if(resultado){
-        // imprime resultado
-        console.log(imprimir.imprimirResultado(numero, resultado))
-        entradaDeDados.close()
-    }else{
-        console.log('ERRO, por favor digite um numero valido.')
-        entradaDeDados.close()
-    }
-})
+        // confirma se o resultado é valido
+        if(resultado){
+            // imprime resultado
+            console.log(imprimir.imprimirResultado(numero, resultado))
+            entradaDeDados.close()
+        }else{
+            console.log('ERRO, por favor digite um numero valido.')
+            entradaDeDados.close()
+        }
+    })
+}
+
+// permite a execução sem passar pelo main
+if(require.main == module){
+    fatorialApp()
+}
+
+// exportando app
+module.exports = {fatorialApp}
