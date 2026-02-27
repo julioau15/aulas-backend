@@ -77,10 +77,38 @@ const calcularTabuada = (n, contadorI, contadorF) => {
 
 }
 
+// calcula o fatorial de um número
+const calcularFatorial = (n) => {
+    let numero = Number(n)
+    let resultado = numero
+
+    // validação
+    if (!tratamento.validarNumero(numero) || numero < 1){
+        return false
+    }else{
+        // fatorial de 1 é igual a 1
+        if(numero == 1){
+            return 1
+
+        }else{
+            // repetição para calcular o fatorial
+            for (let i = 0; i <= numero; i++){
+                // o resultado sempre vai multiplicar o numero - 1
+                resultado *= (numero - 1)
+                // numero sofre um decréscimo
+                numero--
+            }
+            // retorna resultado
+            return resultado
+        }
+    }
+}
+
 // exporta função
 module.exports = {
     calcularImc,
     calcularMedia,
     calcularMedia2,
-    calcularTabuada
+    calcularTabuada,
+    calcularFatorial
 }
