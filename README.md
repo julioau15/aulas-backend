@@ -7,3 +7,4 @@
 * Aula 03 - funções
 * Exercício 03 - Calculadora simples para realizar operações de `(soma, subtração, divisão e multiplicação)`
 * Correção Exercício 03 - `(Switch case, função Anônima, Arrow function)`
+* Exercício 04 - calcula imc, média escolar, tabuada, fatorial e verfica números pares ou impares
