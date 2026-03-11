@@ -27,7 +27,18 @@
 */
 
 // formas de criar um array
-const listaDeNomes = ['josé','maria','joão', 'andre', 'alex']
+const listaDeNomes = [
+                    'josé',
+                    'maria',
+                    'joão',
+                    'andre',
+                    'alex',
+                    'bruna',
+                    'jake',
+                    'carlos',
+                    'josé',
+                    'josé da silva'
+                    ]
 const listaDeClientes = []
 const listaDeFornecedores = []
 
@@ -81,12 +92,71 @@ const manipularDados = () => {
 
     // Permite adcionar novos valores sempre no final da lista
     listaDeFornecedores.push('josé da silva','maria da silva','joão da silva', 'carlos da silva', 'andre sa silva', 'luiz da silva')
+
+    // Permite adcionar novos valores sempre no inicio
+    listaDeFornecedores.unshift('Ana Carolina')
     
-    console.log('\nClientes:')
-    listaDeClientes.forEach(cliente => console.log(cliente))
+    // Permite remover valores do final da lista e retorna ele
+    listaDeFornecedores.pop()
+
+    // Permite remover valores do inicio da lista e retorna ele
+    listaDeFornecedores.shift()
+
+    // Permite remover um valor baseado no indice da lista
+        // splice(indece, quantidade de elementos)
+    listaDeFornecedores.splice(2,1)
 
     console.log('\nFornecedores:')
-    listaDeFornecedores.forEach(fornecedor => console.log(fornecedor))
+    console.table(listaDeFornecedores)
 }
 
-manipularDados()
+const removerElemento = (dado, array) => {
+    let elemento = String(dado).toLowerCase()
+    let lista = array
+
+    // Retorna o indice de um elemento fazendo a busca pelo valor
+    let indice = lista.indexOf(elemento)
+
+    // O indexOf retorna -1 quando não encontra o elemento
+    if(indice != -1){
+        lista.splice(indice,1)
+        return true
+    }else{
+        return false
+    }
+
+    
+    // for(indice in lista){
+    //     if(lista[indice] == elemento){
+    //         lista.splice(indice, 1)
+    //     }
+    // }
+}
+
+// Verifica a existencia de um elemento em uma lista
+const isInList = (dado, array) =>  array.includes(String(dado).toLowerCase())
+
+// if (isInList(dado, array)){
+//     removerElemento(dado, array)
+//     console.log('item removido com sucesso')
+//     console.table(array)
+// }else
+//     console.log('item não encontrado')
+
+
+const quantidadeItens = (dado, array) => {
+    let elemento = String(dado).toLowerCase()
+    let lista = array
+    let cont = 0
+
+    lista.forEach(element => {
+        if(String(element).toLowerCase() == elemento)
+            cont++
+    })
+
+    return cont
+}
+let dado = 'josé'
+let array = listaDeNomes
+
+// console.log(`Quantidade de itens: ` + quantidadeItens(dado,array))
