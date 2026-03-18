@@ -42,6 +42,7 @@ const listaDeNomes = [
 const listaDeClientes = []
 const listaDeFornecedores = []
 
+// Exibe dados de um array
 const exibirDados = () => {
     // Exibe o objeto array e seu conteúdo
     console.log(listaDeNomes)
@@ -84,6 +85,7 @@ const exibirDados = () => {
         console.log(`O nome do cliente é: ${cliente}`)    
 }
 
+// Manipula dados em um array
 const manipularDados = () => {
     listaDeClientes[0] = 'rafael'
     listaDeClientes[1] = 'felipe'
@@ -116,6 +118,7 @@ const manipularDados = () => {
     console.table(listaDeFornecedores)
 }
 
+// remove um elemento de um array
 const removerElemento = (dado, array) => {
     let elemento = String(dado).toLowerCase()
     let lista = array
@@ -138,9 +141,6 @@ const removerElemento = (dado, array) => {
     //     }
     // }
 }
-
-// Verifica a existencia de um elemento em uma lista
-const isInList = (dado, array) =>  array.includes(String(dado).toLowerCase())
 
 // Verifica a quantidade de um determinado conteudo em um array 
 const quantidadeItens = (dado, array) => {
@@ -181,6 +181,7 @@ const criandoDadosJSON = () => {
     console.log(aluno)
 }
 
+// cadastra produtos em um array com JSON
 const cadastroDeProdutos = () => {
     let marcas = [
         {"id": 1, "marca": "Lg",         "telefone": "9493694598", "email": "lg@gmail.com"},         // indice 0
@@ -245,7 +246,8 @@ const cadastroDeProdutos = () => {
     return produtos
 }
 
-const exibirProdutos = (produtos) => {
+// exibe todos produtos
+const exibirProdutos = (...produtos) => {
     produtos.forEach(produto => {
         console.log("-------------------------")
         console.log(`\nProduto: ${produto.nome}`)
@@ -262,5 +264,37 @@ const exibirProdutos = (produtos) => {
     console.log('-------------------------')
 }
 
+// pesquisa produtos pelo nome e exibe
+const pesquisarProdutoPorNome = (produtos, nome) => {
+    let status = false
+    produtos.forEach(produto => {
+        if(String(produto.nome).toLowerCase() == String(nome).toLowerCase()){
+            exibirProdutos(produto)
+            status = true
+        }
+    })
+
+    if(!status){
+        console.log('Produto não encontrado')
+    }
+}
+
+// pesquisa produtos pela cor e exibe
+const pesquisarProdutoPorCor = (produtos, cor) => {
+    let status = false
+    produtos.forEach(produto => {
+        produto.cor.forEach(itemCor => {
+            if(String(itemCor.cor).toLowerCase() == String(cor).toLowerCase()){
+                exibirProdutos(produto)
+                status = true
+            }
+        })
+    })
+
+    if(!status){
+        console.log('Cor não encontrada')
+    }
+}
+
 const produtos = cadastroDeProdutos()
-exibirProdutos(produtos)
+pesquisarProdutoPorCor(produtos, 'preto')
