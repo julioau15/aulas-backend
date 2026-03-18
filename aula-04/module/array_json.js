@@ -242,7 +242,10 @@ const cadastroDeProdutos = () => {
 
     // produtos[0].cor.forEach(cor => console.log(`A cor do produto é: ${cor.cor}`))
 
+    return produtos
+}
 
+const exibirProdutos = (produtos) => {
     produtos.forEach(produto => {
         console.log("-------------------------")
         console.log(`\nProduto: ${produto.nome}`)
@@ -257,8 +260,7 @@ const cadastroDeProdutos = () => {
         produto.marca.forEach(marca => console.log(marca))
     })
     console.log('-------------------------')
-
-
 }
 
-cadastroDeProdutos()
+const produtos = cadastroDeProdutos()
+exibirProdutos(produtos)
