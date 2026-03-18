@@ -24,12 +24,18 @@ const getListaDeEstados = () => {
         "quantidade":0
     }
 
+    let status = false
+
     listaDeEstados.estados.forEach(estado => {
         estados.uf.push(estado.sigla)
         estados.quantidade++
+        status = true
     })
 
-    return estados
+    if(status)
+        return estados
+    else
+        return status
 }
 
 // retorna as informações de um estado
@@ -69,4 +75,24 @@ const getCapitalEstado = (sigla) => {
     return capital
 }
 
-console.log(getCapitalEstado('ac'))
+// retorna os estados de um região
+const getEstadosRegiao = (nomeRegiao) => {
+    let regiao = {
+        "regiao":'',
+        "estados":[] 
+    }
+    let status = false
+
+    listaDeEstados.estados.forEach(estado => {
+        if(String(estado.regiao).toLowerCase() == String(nomeRegiao).toLowerCase()){
+            regiao.estados.push({"uf": estado.sigla,"descricao": estado.nome})
+            regiao.regiao = (estado.regiao).toUpperCase()
+            status = true
+        }
+    })
+
+    if(status)
+        return regiao
+    else
+        return status
+}
