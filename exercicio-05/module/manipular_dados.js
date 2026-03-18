@@ -50,3 +50,23 @@ const getDadosEstado = (sigla) => {
 
     return estado
 }
+
+// retorna as informações de uma capital
+const getCapitalEstado = (sigla) => {
+    let uf = String(sigla).toLowerCase()
+    let capital = false
+
+    listaDeEstados.estados.forEach(objetoEstado => {
+        if(String(objetoEstado.sigla).toLowerCase() == uf){
+            capital = {
+                "uf": objetoEstado.sigla,
+                "descricao": objetoEstado.nome,
+                "capital": objetoEstado.capital,
+            }
+        }
+    })
+
+    return capital
+}
+
+console.log(getCapitalEstado('ac'))
