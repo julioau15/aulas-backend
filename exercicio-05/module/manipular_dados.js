@@ -32,3 +32,21 @@ const getListaDeEstados = () => {
     return estados
 }
 
+// retorna as informações de um estado
+const getDadosEstado = (sigla) => {
+    let uf = String(sigla).toLowerCase()
+    let estado = false
+
+    listaDeEstados.estados.forEach(objetoEstado => {
+        if(String(objetoEstado.sigla).toLowerCase() == uf){
+            estado = {
+                "uf": objetoEstado.sigla,
+                "descricao": objetoEstado.nome,
+                "capital": objetoEstado.capital,
+                "regiao": objetoEstado.regiao
+            }
+        }
+    })
+
+    return estado
+}
