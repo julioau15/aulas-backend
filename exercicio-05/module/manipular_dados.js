@@ -96,3 +96,33 @@ const getEstadosRegiao = (nomeRegiao) => {
     else
         return status
 }
+
+// retorna as capitais do Brasil
+const getCapitalPais = () => {
+    let capitais = {
+        "capitais": []
+    }
+    let status = false
+
+    listaDeEstados.estados.forEach(estado => {
+        if(estado.capital_pais){
+            capitais.capitais.push(
+                {
+                    "captal_atual": estado.capital_pais.capital,
+                    "uf": estado.sigla,
+                    "descricao": estado.nome,
+                    "capital": estado.capital,
+                    "regiao": estado.regiao,
+                    "capital_pais_ano_inicio": estado.capital_pais.ano_inicio,
+                    "capital_pais_ano_termino": estado.capital_pais.ano_fim
+                }
+            )
+            status = true
+        }
+    })
+
+    if(status)
+        return capitais
+    else
+        return status
+}
