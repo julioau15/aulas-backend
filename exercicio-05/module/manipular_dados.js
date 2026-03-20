@@ -126,3 +126,32 @@ const getCapitalPais = () => {
     else
         return status
 }
+
+// retorna as cidades de determinado estado
+const getCidades = (sigla) => {
+    let status = false
+    let uf = String(sigla).toLowerCase()
+    let quantidade_cidades
+    let cidades = {
+        "uf": '',
+        "descricao": '',
+        "quantidade_cidades": 0,
+        "cidades": []
+    }
+   
+    listaDeEstados.estados.forEach(estado => {
+        if(String(estado.sigla).toLowerCase() == uf){
+            quantidade_cidades = estado.cidades.length
+            cidades.uf = estado.sigla
+            cidades.descricao = estado.nome
+            cidades.quantidade_cidades = quantidade_cidades
+            status = true
+            estado.cidades.forEach(cidade => cidades.cidades.push(cidade.nome))
+        }
+    })
+
+    if(status)
+        return cidades
+    else
+        return status
+}
