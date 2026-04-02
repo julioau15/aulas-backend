@@ -1,20 +1,20 @@
 /*************************************************************************************
- * Objetivo: Arquivo responsavel pela craição da api do projeto de estados e cidades
+ * Objetivo: Arquivo responsável pela criação da API do projeto de estados e cidades
  * Data: 01/04/2026
  * Autor: Julio Augusto
  * Versão: 1.0
  * 
- * instalação do EXPRESS: npm install express --save
- *      Dependencia responsavel pela utilização do protocolo http
- *      para criar uma api
+ * Instalação do EXPRESS: npm install express --save
+ *      Dependência responsável pela utilização do protocolo http
+ *      para criar a API
  * 
- * instalação do CORS: npm install cors --save
- *      Dependencia responsavel pelas configurações a serem realizadas
- *      para a permissão de acesso da api
+ * Instalação do CORS: npm install cors --save
+ *      Dependência responsável pelas configurações a serem realizadas
+ *      para a permissão de acesso da API
  * 
  * *********************************************************************************/
 
-// IMPORT das depêndencias para criar a api
+// IMPORT das dependências para criar a API
 const express = require('express')
 const cors = require('cors')
 
@@ -28,10 +28,10 @@ const {
     getCidades
 } = require('./module/manipular_dados')
 
-// criando um objeto para manipular o expresss
+// Criando um objeto para manipular o EXPRESS
 const app = express()
 
-// porta onde a api esta rodando
+// Porta onde a API esta rodando
 const port = 8080
 
 // Conjuntos de Permissões a serem aplicadas no CORS da API
@@ -41,100 +41,115 @@ const corsOptions = {
     allowedHeaders: ['Content-type', 'Autorization'] // Permissões de cabeçalho do cors
 }
 
-const DADOS_PROJETO = {
-    "versao": "1.0",
-    "autor": "Julio Augusto",
-    "projeto": "SENAI",
+const DOC_API = {
+    "project": "Estados e Cidades",
+    "description":"API para manipular dados de Cidades e Estados",
+    "date": "2026-04-02",
+    "version": "1.0",
+    "developer": "Julio Augusto",
     "end-points": [
-        '/v1/senai/estados',
-        '/v1/senai/estado/dados/:uf',
-        '/v1/senai/estado/capital/:uf',
-        '/v1/senai/estado/cidades/:uf',
-        '/v1/senai/regiao/estados/:regiao', 
-        '/v1/senai/capital'
+        {
+            "id": 1,
+            "route 1": '/v1/senai/estados',
+            "description":"Retorna uma lista com todos estados"
+        },
+        {
+            "id": 2,
+            "route 2": '/v1/senai/estado/dados/sp',
+            "description":"Retorna os dados dos estados filtrando pela uf"
+        },
+        {
+            "id": 3,
+            "route 3": '/v1/senai/estado/capital/sp',
+            "description":"Retorna os dados da capital de cada estado filtrando pela uf"
+        },
+        {
+            "id": 4,
+            "route 4": '/v1/senai/estado/cidades/sp',
+            "description":"Retorna as cidades de cada estado filtrando pela uf"
+        },
+        {
+            "id": 5,
+            "route 5": '/v1/senai/regiao/estados/norte',
+            "description":"Retorna os estados de cada região filtrando pelo nome da região"
+        }, 
+        {
+            "id": 6,
+            "route 6": '/v1/senai/capital/brasil',
+            "description":"Retorna os estados que foram capitais do Brasil"
+        }
     ]
 }
 
-app.get('/', (req,res) => {
-    res.json(DADOS_PROJETO)
-    res.status(200)
+// Raiz da API
+app.get('/v1/senai/help', (req,res) => {
+    res.status(200).json(DOC_API)
 })
 
-// configura as permissões da API através do CORS
+// Configura as permissões da API através do CORS
 app.use(cors(corsOptions))
 
 // Criando EndPoints para a API
     // (res) Response → retornos da API
     // (req) Request → chegada de dados na API
+// retorna todas UFs dos estados do Brasil
 app.get('/v1/senai/estados', (req,res) => {
     let estados = getListaDeEstados()
-    if(estados){
-        res.json(estados)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, não foi possivel acessar a lista de estados."})
-        res.status(404)
-    }
+    if(estados)
+        res.status(200).json(estados)
+    else
+        res.status(404).json({"message": "Erro, não foi possivel acessar a lista de estados."})
 })
 
+// Retorna os dados dos estados filtrando pela uf
 app.get('/v1/senai/estado/dados/:uf', (req,res) => {
     let uf = req.params.uf
     let dadosEstado = getDadosEstado(uf)
-    if(dadosEstado){
-        res.json(dadosEstado)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, dados do estado não encontrados."})
-        res.status(404)
-    }
+    if(dadosEstado)
+        res.status(200).json(dadosEstado)
+    else
+        res.status(404).json({"message": "Erro, dados do estado não encontrados."})
+    
     
 })
 
+// Retorna os dados da capital de cada estado filtrando pela uf
 app.get('/v1/senai/estado/capital/:uf', (req,res) => {
     let uf = req.params.uf
     let capitalEstado = getCapitalEstado(uf)
-    if(capitalEstado){
-        res.json(capitalEstado)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, dados do estado não encontrados."})
-        res.status(404)
-    }
+    if(capitalEstado)
+        res.status(200).json(capitalEstado)
+    else
+        res.status(404).json({"message": "Erro, dados do estado não encontrados."})
 })
 
+// Retorna os estados de cada região filtrando pelo nome da região
 app.get('/v1/senai/regiao/estados/:regiao', (req, res) => {
     let regiao = req.params.regiao
     let estadosRegiao = getEstadosRegiao(regiao)
-    if(estadosRegiao){
-        res.json(estadosRegiao)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, dados da região não encontrados."})
-        res.status(404)
-    }
+    if(estadosRegiao)
+        res.status(200).json(estadosRegiao)
+    else
+        res.status(404).json({"message": "Erro, dados da região não encontrados."})
 })
 
+// Retorna as cidades de cada estado filtrando pela uf
 app.get('/v1/senai/estado/cidades/:uf', (req, res) => {
     let uf = req.params.uf
     let cidades = getCidades(uf)
-    if(cidades){
-        res.json(cidades)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, dados do estado não encontrados."})
-        res.status(404)
-    }
+    if(cidades)
+        res.status(200).json(cidades)
+    else
+        res.status(404).json({"message": "Erro, dados do estado não encontrados."})   
 })
 
-app.get('/v1/senai/capital', (req,res) => {
+// Retorna os estados que foram capitais do Brasil
+app.get('/v1/senai/capital/brasil', (req,res) => {
     let capital = getCapitalPais()
-    if(capital){
-        res.json(capital)
-        res.status(200)
-    }else{
-        res.json({"message": "Erro, dados da capital não encontrados."})
-        res.status(404)
-    }
+    if(capital)
+        res.status(200).json(capital)
+    else
+        res.status(404).json({"message": "Erro, dados da capital não encontrados."})
 })
 
 // Serve para inicializar a API para receber requisições
