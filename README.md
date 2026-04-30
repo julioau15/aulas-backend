@@ -5,6 +5,7 @@
 * Aula 03 - funções
 * Aula 04 - Arrays e Json
 * Aula 05 - API (cidades e estados)
+* Aula 06 - CRUD de Filmes 
 * Exercício 01 - Somando dois valores
 * Exercício 02 - Cálculo de Juros Compostos com validação
 * Exercício 03 - Calculadora simples para realizar operações de `(soma, subtração, divisão e multiplicação)`
