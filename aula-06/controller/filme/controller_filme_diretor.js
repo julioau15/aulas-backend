@@ -157,7 +157,7 @@ const excluirDiretoresIdFilme = async (idFilme) => {
     let message = JSON.parse(JSON.stringify(config_message))
 
     try {
-        let result = await filmeDiretorDAO.deleteFilmeDiretor(idFilme)
+        let result = await filmeDiretorDAO.deleteDiretoresByIdFilme(idFilme)
 
         if(!result) return message.ERROR_INTERNAL_SERVER_MODEL // 500
 

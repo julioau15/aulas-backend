@@ -157,7 +157,7 @@ const excluirAtoresIdFilme = async (idFilme) => {
     let message = JSON.parse(JSON.stringify(config_message))
 
     try {
-        let result = await filmeAtorDAO.deleteFilmeAtor(idFilme)
+        let result = await filmeAtorDAO.deleteAtoresByIdFilme(idFilme)
 
         if(!result) return message.ERROR_INTERNAL_SERVER_MODEL // 500
 
